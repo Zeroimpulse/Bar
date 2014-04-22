@@ -18,7 +18,7 @@ public class FactoryStoreSignal {
 	 * activated is set.
 	 */
 	public FactoryStoreSignal() {
-		units = 5;
+		units = 0;
 		started = false;
 	}
 	
@@ -35,8 +35,8 @@ public class FactoryStoreSignal {
 	 * @throws InterruptedException
 	 */
 	public synchronized void waitS() throws InterruptedException {
-		Store s = (Store) Thread.currentThread();
-
+		Factory f = (Factory)Thread.currentThread();
+		started = false;
 		while (!started) 
 			wait();
 		
@@ -50,5 +50,7 @@ public class FactoryStoreSignal {
 	 */
 	public synchronized void send() {
 		started = true;
+		notifyAll();
+		
 	}
 }
