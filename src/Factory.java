@@ -1,8 +1,9 @@
 
 public class Factory extends Thread {
 	private FactoryStoreSignal fs;
-	private int maxUnits;
+	private int maxUnits = 20;
 	private int units;
+	private int warehouseUnits;
 	
 	public Factory (FactoryStoreSignal s) {
 		fs = s;
@@ -17,9 +18,14 @@ public class Factory extends Thread {
 				e.printStackTrace();
 			}
 			
-			units = (int) (Math.random() * 6);
+			warehouseUnits = fs.getUnits();
 			
+			units = (int) (maxUnits * Math.exp(-.007 * warehouseUnits));
 			System.out.println(units);
+			
+			fs.add(units);
+			
+			
 			
 			
 			

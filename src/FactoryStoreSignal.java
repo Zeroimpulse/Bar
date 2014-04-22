@@ -53,4 +53,8 @@ public class FactoryStoreSignal {
 		notifyAll();
 		
 	}
+	
+	public synchronized void add(int produced) {
+		units += produced;
+	}
 }
